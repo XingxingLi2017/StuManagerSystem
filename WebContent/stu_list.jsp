@@ -10,7 +10,7 @@
 <body>
 	<h1>Information of Students</h1>
 	<table border = "1" width="700">
-		<tr>
+		<tr align="center">
 			<td>id</td>
 			<td>name</td>
 			<td>age</td>
@@ -18,7 +18,7 @@
 			<td>address</td>
 		</tr>
 		<c:forEach var="stu" items="${sessionScope.list}" >
-			<tr>
+			<tr align="center">
 				<td>${stu.id}</td>
 				<td>${stu.name}</td>
 				<td>${stu.age}</td>
