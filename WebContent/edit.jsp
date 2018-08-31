@@ -26,12 +26,14 @@
 			<tr>
 				<td>gender</td>
 				<td>
-				<c:if test="${stu.gender = 'male' }">
+				<c:if test="${stu.gender == 'male' }">
 					<input type="radio" name="gender" value="male" checked >male
 					<input type="radio" name="gender" value="female" >female
 				</c:if>
-					<input type="radio" name="gender" value="male" >male
-					<input type="radio" name="gender" value="female" checked >female
+				<c:if test="${stu.gender == 'female' }">
+					<input type="radio" name="gender" value="male">male
+					<input type="radio" name="gender" value="female" checked>female
+				</c:if>
 				</td>
 			</tr>
 			<tr>
