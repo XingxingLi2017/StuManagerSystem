@@ -66,9 +66,8 @@
 						&nbsp;&nbsp;
 						
 						<c:if test="${pageBean.currentPage != 1}">
-							
-							<a href="StudentListPageServlet?currentPage=${pageBean.currentPage-1}" >Previous</a>
 							<a href="StudentListPageServlet?currentPage=1">FirstPage</a>
+							<a href="StudentListPageServlet?currentPage=${pageBean.currentPage-1}" >Previous</a>
 						</c:if>
 						<c:forEach begin="1" end="${pageBean.totalPage }" var="i">
 							<c:if test="${pageBean.currentPage == i}">
