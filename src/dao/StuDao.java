@@ -6,6 +6,12 @@ import java.util.List;
 import bean.Student;
 
 public interface StuDao {
+	
+	int PAGE_SIZE = 5;
+	/*
+	 * find students in current page
+	 * */
+	List<Student> findStudentByPage(int currentPage) throws SQLException;
 	/*
 	 * find all students' information
 	 * */
@@ -27,4 +33,8 @@ public interface StuDao {
 	 * search student based on name and gender
 	 * */
 	List<Student> searchStudent(String sname, String sgender) throws SQLException;
+	/*
+	 * query the total number of entry
+	 * */
+	int findCount()throws SQLException ;
 }

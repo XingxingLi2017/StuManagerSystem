@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h3><a href = "StudentListServlet">Show all the student</a></h3>
+	<h3><a href = "StudentListPageServlet?currentPage=1">Show students by pages</a></h3>
 </body>
 </html>

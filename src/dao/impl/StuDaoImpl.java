@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import bean.Student;
 import dao.StuDao;
@@ -24,8 +28,7 @@ public class StuDaoImpl implements StuDao {
 	@Override
 	public List<Student> findAll() throws SQLException {
 		QueryRunner runner = new QueryRunner(JDBCUtil2.getDataSource());
-		List<Student> list = runner.query("select * from stu", new BeanListHandler<Student>(Student.class));
-		return list;
+		return runner.query("select * from stu", new BeanListHandler<Student>(Student.class));
 	}
 	
 	/*
@@ -86,5 +89,22 @@ public class StuDaoImpl implements StuDao {
 			params.add(sgender);
 		}
 		return runner.query(sql, new BeanListHandler<Student>(Student.class), params.toArray());
+	}
+
+	@Override
+	public List<Student> findStudentByPage(int currentPage) throws SQLException {
+		QueryRunner runner = new QueryRunner(JDBCUtil2.getDataSource());
+		List<Object> params = new ArrayList<>();
+		params.add(PAGE_SIZE);
+		params.add((currentPage - 1) * PAGE_SIZE);
+		return runner.query("select * from stu limit ? offset ?", new BeanListHandler<Student>(Student.class), params.toArray());
+	}
+
+	@Override
+	public int findCount() throws SQLException {
+		QueryRunner runner = new QueryRunner(JDBCUtil2.getDataSource());
+		// ScalarHandler: used for statistic information
+		Long count = (Long)runner.query("select Count(*) from stu", new ScalarHandler());
+		return count.intValue();
 	}
 }

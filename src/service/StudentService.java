@@ -3,6 +3,7 @@ package service;
 import java.sql.SQLException;
 import java.util.List;
 
+import bean.PageBean;
 import bean.Student;
 /*
  * Bussiness Logic Layer
@@ -23,5 +24,12 @@ public interface StudentService {
 	void delete(int sid) throws SQLException;
 	
 	void update(Student student) throws SQLException;
+	
 	List<Student> searchStudent(String sname, String sgender) throws SQLException;
+	
+	/*
+	 * paging business logic service: search data in current page
+	 * */
+	PageBean searchStudent(int currentPage) throws SQLException;
+	
 }
