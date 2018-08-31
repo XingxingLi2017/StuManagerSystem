@@ -18,6 +18,7 @@
 </head>
 <body>
 	<h1>Information of Students</h1>
+	<a href="main.jsp">Back to Home</a>
 	<form action="SearchStudentServlet" method="post">
 		<table border="1" width="700">
 			<tr>
@@ -66,7 +67,8 @@
 						
 						<c:if test="${pageBean.currentPage != 1}">
 							
-							FirstPage||Previous
+							<a href="StudentListPageServlet?currentPage=${pageBean.currentPage-1}" >Previous</a>
+							<a href="StudentListPageServlet?currentPage=1">FirstPage</a>
 						</c:if>
 						<c:forEach begin="1" end="${pageBean.totalPage }" var="i">
 							<c:if test="${pageBean.currentPage == i}">

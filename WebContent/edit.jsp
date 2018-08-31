@@ -57,7 +57,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="Add Student"></td>
+				<td colspan="2"><input type="submit" value="update"></td>
 			</tr>
 		</table>
 	</form>

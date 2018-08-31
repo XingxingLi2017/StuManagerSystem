@@ -18,6 +18,7 @@
 </head>
 <body>
 	<h1>Information of Students</h1>
+	<a href="main.jsp">Back to Home</a>
 	<form action="SearchStudentServlet" method="post">
 		<table border="1" width="700">
 			<tr>
