@@ -41,15 +41,19 @@ public class Login extends HttpServlet {
 		
 		UserDao dao = new UserDaoImpl();
 		boolean isSuccess = dao.login(userName, password);
-		if (isSuccess) {
-			StuDao stuDao = new StuDaoImpl();
-			List<Student> list = stuDao.findAll();
-			request.getSession().setAttribute("list", list);
-			response.sendRedirect("stu_list.jsp");
-		} else {
-			response.getWriter().write("invalide username or password");
+		try {
+			if (isSuccess) {
+				request.getRequestDispatcher("main.jsp").forward(request, response);
+//				StuDao stuDao = new StuDaoImpl();
+//				List<Student> list = stuDao.findAll();
+//				request.getSession().setAttribute("list", list);
+//				response.sendRedirect("stu_list.jsp");
+			} else {
+				response.getWriter().write("invalide username or password");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
 	}
 
 }

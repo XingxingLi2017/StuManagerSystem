@@ -1,4 +1,4 @@
-package dao;
+package util;
 
 import java.io.FileInputStream;
 import java.sql.Connection;
@@ -6,8 +6,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Properties;
-
-import util.JDBCUtil;
 
 public class CreateTables {
 

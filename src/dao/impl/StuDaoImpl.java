@@ -1,50 +1,72 @@
 package dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import bean.Student;
 import dao.StuDao;
-import util.JDBCUtil;
+import util.JDBCUtil2;
 
+/*
+ * implement StuDao interface
+ * */
 public class StuDaoImpl implements StuDao {
 
+	/*
+	 * find all the students
+	 * */
 	@Override
-	public List<Student> findAll() {
-		Connection conn = null;
-		List<Student> list = null;
-		try {
-			conn = JDBCUtil.getConnection();
-			
-			String sql = "select * from t_stu";
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			list = new ArrayList<>();
-			while (rs.next()) {
-				Student stu = new Student();
-				stu.setId(rs.getInt("id"));
-				stu.setAge( rs.getInt("age"));
-				stu.setName( rs.getString("name"));
-				stu.setGender( rs.getString("gender"));
-				stu.setAddress( rs.getString("address"));
-				list.add(stu);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+	public List<Student> findAll() throws SQLException {
+		QueryRunner runner = new QueryRunner(JDBCUtil2.getDataSource());
+		List<Student> list = runner.query("select * from stu", new BeanListHandler<Student>(Student.class));
 		return list;
 	}
+	
+	/*
+	 * insert a new student 
+	 * */
+	@Override
+	public void insert(Student student) throws SQLException {
+		System.out.println(student);
+		QueryRunner runner = new QueryRunner(JDBCUtil2.getDataSource());
+		String sql = "insert into `stu` values (null,?,?,?,?,?,?)";
+		runner.update(sql,
+				student.getSname(),
+				student.getGender(),
+				student.getPhone(),
+				student.getBirthday(),
+				student.getHobby(),
+				student.getInfo()
+				);
+	}
 
+	@Override
+	public void delete(int sid) throws SQLException {
+		QueryRunner runner = new QueryRunner(JDBCUtil2.getDataSource());
+		runner.update("delete from stu where sid=?", sid);
+	}
+
+	@Override
+	public Student findStudentById(int sid) throws SQLException {
+		QueryRunner runner = new QueryRunner(JDBCUtil2.getDataSource());
+		return runner.query("select * from stu where sid=?",new BeanHandler<Student>(Student.class), sid);
+	}
+
+	@Override
+	public void update(Student student) throws SQLException {
+		QueryRunner runner = new QueryRunner(JDBCUtil2.getDataSource());
+		runner.update("update stu set sname=? , gender=?, phone=?, birthday=?, hobby=?, info=? where sid=? ",
+				student.getSname(),
+				student.getGender(),
+				student.getPhone(),
+				student.getBirthday(),
+				student.getHobby(),
+				student.getInfo(),
+				student.getSid()
+				);
+	}
 }

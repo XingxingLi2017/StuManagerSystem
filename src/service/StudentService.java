@@ -1,26 +1,27 @@
-package dao;
+package service;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import bean.Student;
-
-public interface StuDao {
+/*
+ * Bussiness Logic Layer
+ * */
+public interface StudentService {
+	
 	/*
 	 * find all students' information
 	 * */
 	List<Student> findAll() throws SQLException ;
 	
 	Student findStudentById(int sid) throws SQLException ;
-	
-	/*
-	 * insert a new student into database
-	 * */
+
 	void insert(Student student) throws SQLException;
 	/*
-	 * delete a student
+	 * delete one student
 	 * */
 	void delete(int sid) throws SQLException;
 	
 	void update(Student student) throws SQLException;
+	
 }
