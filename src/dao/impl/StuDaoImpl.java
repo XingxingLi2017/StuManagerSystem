@@ -85,7 +85,7 @@ public class StuDaoImpl implements StuDao {
 			params.add("%"+sname+"%");
 		}
 		if (!TextUtils.isEmpty(sgender)) {
-			sql = sql + " and sgender = ?";
+			sql = sql + " and gender = ?";
 			params.add(sgender);
 		}
 		return runner.query(sql, new BeanListHandler<Student>(Student.class), params.toArray());
