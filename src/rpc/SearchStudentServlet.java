@@ -10,26 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.Student;
-import dao.StuDao;
-import dao.impl.StuDaoImpl;
 import service.StudentService;
 import service.impl.StudentServiceImpl;
 
 /**
- * Servlet implementation class StudentListServlet
- * 
- * query all the student and present student list on view
+ * Servlet implementation class SearchStudentServlet
  */
-@WebServlet("/StudentListServlet")
-public class StudentListServlet extends HttpServlet {
+@WebServlet("/SearchStudentServlet")
+public class SearchStudentServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String sname = request.getParameter("sname");
+		String sgender = request.getParameter("sgender");
 		try {
 			StudentService service = new StudentServiceImpl();
-			List<Student> list = service.findAll();
+			List<Student> list = service.searchStudent(sname, sgender);
+			System.out.println(list);
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("stu_list.jsp").forward(request, response);
-		} catch (Exception e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}

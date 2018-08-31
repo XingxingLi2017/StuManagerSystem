@@ -23,4 +23,8 @@ public interface StuDao {
 	void delete(int sid) throws SQLException;
 	
 	void update(Student student) throws SQLException;
+	/*
+	 * search student based on name and gender
+	 * */
+	List<Student> searchStudent(String sname, String sgender) throws SQLException;
 }

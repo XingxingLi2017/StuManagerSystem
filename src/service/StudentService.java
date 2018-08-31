@@ -23,5 +23,5 @@ public interface StudentService {
 	void delete(int sid) throws SQLException;
 	
 	void update(Student student) throws SQLException;
-	
+	List<Student> searchStudent(String sname, String sgender) throws SQLException;
 }

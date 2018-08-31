@@ -42,4 +42,9 @@ public class StudentServiceImpl implements StudentService {
 		StuDao dao = new StuDaoImpl();
 		dao.update(student);
 	}
+
+	@Override
+	public List<Student> searchStudent(String sname, String sgender) throws SQLException {
+		return new StuDaoImpl().searchStudent(sname, sgender);
+	}
 }
