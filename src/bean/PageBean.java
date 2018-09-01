@@ -20,6 +20,7 @@ public class PageBean<T> {
 	private int pageSize;
 	private int totalSize;
 	private List<T> list;
+	
 	public int getCurrentPage() {
 		return currentPage;
 	}
@@ -49,6 +50,11 @@ public class PageBean<T> {
 	}
 	public void setList(List<T> list) {
 		this.list = list;
+	}
+	@Override
+	public String toString() {
+		return "PageBean [currentPage=" + currentPage + ", totalPage=" + totalPage + ", pageSize=" + pageSize
+				+ ", totalSize=" + totalSize + ", list=" + list + "]";
 	}
 	
 }
